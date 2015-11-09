@@ -6,3 +6,33 @@ u_multicast.pas
 u_qrXslxExport.pas 
 - QuickReports Microsoft Excel (XLSX) export filter. Dependency: [zexmlss](http://avemey.com/zexmlss/index.php?lang=en). Zexmlss uses Abbrevia.
 
+u_intfCustomMessageBox.pas
+
+allows creating Windows MessageBoxes like this:
+
+
+procedure TTestCustomMessageDialog.test_CustomMessageDlg;
+var
+  dlg: ICustomMessageBox;
+begin
+  dlg := CustomMessageDlg.SetText(
+           'Testing mtWarning '+sLineBreak+
+           'line2.1')
+         .SetType(mtWarning)
+         .SetButtons(['button1','button2'])
+         .SetDefBtn('button1');
+  
+  dlg.Execute;
+  
+  dlg.settype(mtError);
+  dlg.SetText(
+           'Testing mtError '+sLineBreak+
+           'line2.2');
+  dlg.Execute;
+  
+  dlg.settype(mtInformation);
+  dlg.SetText(
+           'Testing mtInformation '+sLineBreak+
+           'line2.3');
+  dlg.Execute;
+end;
