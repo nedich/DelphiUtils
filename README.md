@@ -8,9 +8,9 @@ u_qrXslxExport.pas
 
 u_intfCustomMessageBox.pas
 
-allows creating Windows MessageBoxes like this:
+- allows creating Windows MessageBoxes like this:
 
-
+```Pascal
 procedure TTestCustomMessageDialog.test_CustomMessageDlg;
 var
   dlg: ICustomMessageBox;
@@ -36,3 +36,4 @@ begin
            'line2.3');
   dlg.Execute;
 end;
+```
