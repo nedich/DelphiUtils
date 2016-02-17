@@ -14,26 +14,36 @@ u_intfCustomMessageBox.pas
 procedure TTestCustomMessageDialog.test_CustomMessageDlg;
 var
   dlg: ICustomMessageBox;
+  answer: string;
+const
+  button1 = 'button1';
+  button2 = 'Show an error in next dlg';
 begin
   dlg := CustomMessageDlg.SetText(
            'Testing mtWarning '+sLineBreak+
            'line2.1')
          .SetType(mtWarning)
-         .SetButtons(['button1','button2'])
-         .SetDefBtn('button1');
+         .SetButtons([button1,button2])
+         .SetDefBtn(button1);
   
-  dlg.Execute;
+  answer := dlg.Execute;
   
-  dlg.settype(mtError);
   dlg.SetText(
            'Testing mtError '+sLineBreak+
-           'line2.2');
+           'line2.2'+sLineBreak+
+           'You selected: '+answer);
+           
+  if(answer=button1) then
+    dlg.SetType(mtError);
+    
   dlg.Execute;
   
-  dlg.settype(mtInformation);
+  dlg.SetType(mtInformation);
   dlg.SetText(
            'Testing mtInformation '+sLineBreak+
            'line2.3');
   dlg.Execute;
 end;
 ```
+
+Advantages: saves a lot of intermediate variables and makes dialog showing a LOT more flexible.
